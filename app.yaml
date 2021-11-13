@@ -1,0 +1,28 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: kubevela-demo-app
+spec:
+  components:
+    - name: kubevela-demo-app-web
+      type: webservice
+      properties:
+        image: somefive/kubevela-demo-cicd-app
+        imagePullPolicy: Always
+        port: 8080
+      traits:
+        - type: rollout
+          properties:
+            rolloutBatches:
+              - replicas: 2
+              - replicas: 3
+            batchPartition: 0
+            targetSize: 5
+        - type: labels
+          properties:
+            jenkins-build-commit: GIT_COMMIT
+        - type: ingress
+          properties:
+            domain: kubevela-demo-cicd-app.cf7c0ed25b151437ebe1ef58efc29bca4.us-west-1.alicontainer.com
+            http:
+              "/": 8088
