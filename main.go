@@ -1,17 +1,16 @@
-package main
+ackage main
 
 import (
-    "fmt"
-    "net/http"
+        "fmt"
+        "net/http"
 )
 
-const VERSION = "0.1.0-v1alpha1"
+const VERSION = "0.1.7"
 
 func main() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        _, _ = fmt.Fprintf(w, "Version: %s\n", VERSION)
-    })
-    if err := http.ListenAndServe(":8088", nil); err != nil {
-        println(err.Error())
-    }
+        http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+                _, _ = fmt.Fprintf(w, "Version: %s\n", VERSION)        })
+        if err := http.ListenAndServe(":8088", nil); err != nil {
+                println(err.Error())
+        }
 }
