@@ -21,6 +21,7 @@ spec:
           properties:
             jenkins-build-commit: GIT_COMMIT
         - type: ingress
-          properties:            domain: app.vela-demor.com
+          properties:
+            domain: app.vela-demor.com
             http:
               "/": 8088
