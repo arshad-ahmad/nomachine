@@ -7,10 +7,9 @@ spec:
     - name: kubevela-demo-app-web
       type: webservice
       properties:
-        image: somefive/kubevela-demo-cicd-app
+        image: arshad1914/kubevela-demo-cicd-app
         imagePullPolicy: Always
-        port: 8080
-      traits:
+        port: 8080      traits:
         - type: rollout
           properties:
             rolloutBatches:
@@ -22,7 +21,6 @@ spec:
           properties:
             jenkins-build-commit: GIT_COMMIT
         - type: ingress
-          properties:
-            domain: kubevela-demo-cicd-app.cf7c0ed25b151437ebe1ef58efc29bca4.us-west-1.alicontainer.com
+          properties:            domain: app.vela-demor.com
             http:
               "/": 8088
