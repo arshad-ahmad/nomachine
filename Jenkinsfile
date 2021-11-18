@@ -54,7 +54,7 @@ pipeline {
         success {
             setBuildStatus("Deploy success", "SUCCESS");
         }
-        faliure {
+        failure {
             setBuildStatus("Deploy failed", "FAILURE");
         }
     }
