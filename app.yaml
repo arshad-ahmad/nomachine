@@ -9,7 +9,8 @@ spec:
       properties:
         image: arshad1914/kubevela-demo-cicd-app
         imagePullPolicy: Always
-        port: 8080      traits:
+        port: 8080
+        traits:
         - type: rollout
           properties:
             rolloutBatches:
