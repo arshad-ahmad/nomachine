@@ -5,7 +5,7 @@ pipeline {
         CLUSTER_NAME = ""
         LOCATION = ""
         CREDENTIALS_ID = ""
-        DOCKER
+        DOCKER_CREDENTIAL = "DockerHubCredential"
     }
     stages {
         stage('Checkout') {
