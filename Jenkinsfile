@@ -43,10 +43,18 @@ pipeline {
                         returnStdout: true
                     )
                     echo "app: ${app}"
-                    def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: app, url: "${env.APISERVER_URL}/v1/namespaces/${env.APPLICATION_NAMESPACE}/applications/${env.APPLICATION_NAME}"
+                    def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: app, url: "https://35.185.162.243/v1/namespaces/kubevela-demo-namespace/applications/cicd-demo-app"
                     println('Status: '+response.status)
                     println('Response: '+response.content)
                 }
+            }
+        }
+        post {
+            success {
+                setBuildStatus("Deploy success", "SUCCESS");
+            }
+            faliure {
+                setBuildStatus("Deploy failed", "FAILURE");
             }
         }
     }
