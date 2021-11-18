@@ -30,7 +30,6 @@ pipeline {
                   }
                         def customImage = docker.build(env.DOCKER_IMAGE)
                         customImage.push()
-                    }
                 }
             }
         }
