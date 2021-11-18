@@ -49,13 +49,13 @@ pipeline {
                 }
             }
         }
-        post {
-            success {
-                setBuildStatus("Deploy success", "SUCCESS");
-            }
-            faliure {
-                setBuildStatus("Deploy failed", "FAILURE");
-            }
+    }
+    post {
+        success {
+            setBuildStatus("Deploy success", "SUCCESS");
+        }
+        faliure {
+            setBuildStatus("Deploy failed", "FAILURE");
         }
     }
 }
