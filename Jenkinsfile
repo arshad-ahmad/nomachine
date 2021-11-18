@@ -1,25 +1,16 @@
 pipeline {
     agent any
     environment {
-        GIT_BRANCH = 'main'
-        GIT_URL = 'https://github.com/arshad-ahmad/vela-jenkins.git'
-        DOCKER_REGISTRY = 'https://registry.hub.docker.com'
-        DOCKER_CREDENTIAL = 'DockerHubCredential'
-        DOCKER_IMAGE = 'arshad1914/kubevela-demo-cicd-app'
-        APISERVER_URL = 'http://35.185.162.243'
-        APPLICATION_YAML = 'app.yaml'
-        APPLICATION_NAMESPACE = 'kubevela-demo'
-        APPLICATION_NAME = 'cicd-demo-app'
+        PROJECT_ID = ""
+        CLUSTER_NAME = ""
+        LOCATION = ""
+        CREDENTIALS_ID = ""
+        DOCKER
     }
     stages {
-        stage('Prepare') {
+        stage('Checkout') {
             steps {
-                script {
-                    def checkout = git branch: env.GIT_BRANCH, url: env.GIT_URL
-                    env.GIT_COMMIT = checkout.GIT_COMMIT
-                    env.GIT_BRANCH = checkout.GIT_BRANCH
-                    echo "env.GIT_BRANCH=${env.GIT_BRANCH},env.GIT_COMMIT=${env.GIT_COMMIT}"
-                }
+                checkout scm
             }
         }
         stage('Build') {
