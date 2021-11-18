@@ -50,12 +50,4 @@ pipeline {
             }
         }
     }
-    post {
-        success {
-            setBuildStatus("Deploy success", "SUCCESS");
-        }
-        failure {
-            setBuildStatus("Deploy failed", "FAILURE");
-        }
-    }
 }
