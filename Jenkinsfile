@@ -1,19 +1,12 @@
 pipeline {
     agent any
     environment {
-        GIT_BRANCH = 'main'
-        GIT_URL = 'https://github.com/arshad-ahmad/vela-jenkins.git'
-        DOCKER_REGISTRY = 'https://registry.hub.docker.com'
-        DOCKER_CREDENTIAL = 'DockerHubCredential'
-        DOCKER_IMAGE = 'arshad1914/kubevela-demo-cicd-app'
-        APISERVER_URL = 'https://34.81.131.154'
-        APPLICATION_YAML = 'app.yaml'
-        APPLICATION_NAMESPACE = 'kubevela-demo-namespace'
+	    DOCKER_IMAGE= 'arshad1914/kubevela-demo-cicd-app'
     }
     stages {
-        stage('CheckOut~') {
-            steps {
-                    checkout scm
+        stage('CheckOut') {
+		steps {
+			checkout scm
 		}
 	}
         stage('Build') {
@@ -33,7 +26,7 @@ pipeline {
                 sh 'chmod +x yq_linux_amd64'
                 script {
                     def app = sh (
-                        script: "./yq_linux_amd64 eval -o=json '.spec' ${env.APPLICATION_YAML} | sed -e 's/GIT_COMMIT/$GIT_COMMIT/g'",
+                        script: "./yq_linux_amd64 eval -o=json '.spec' app.yaml | sed -e 's/GIT_COMMIT/$GIT_COMMIT/g'",
                         returnStdout: true
                     )
                     echo "app: ${app}"
