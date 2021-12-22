@@ -9,19 +9,13 @@ pipeline {
         APISERVER_URL = 'https://34.81.131.154'
         APPLICATION_YAML = 'app.yaml'
         APPLICATION_NAMESPACE = 'kubevela-demo-namespace'
-        APPLICATION_NAME = 'cicd-demo-app'
     }
     stages {
-        stage('Prepare') {
+        stage('CheckOut~') {
             steps {
-                script {
-                    def checkout = git branch: env.GIT_BRANCH, url: env.GIT_URL
-                    env.GIT_COMMIT = checkout.GIT_COMMIT
-                    env.GIT_BRANCH = checkout.GIT_BRANCH
-                    echo "env.GIT_BRANCH=${env.GIT_BRANCH},env.GIT_COMMIT=${env.GIT_COMMIT}"
-                }
-            }
-        }
+                    checkout scm
+		}
+	}
         stage('Build') {
             steps {
                 script {
@@ -43,7 +37,7 @@ pipeline {
                         returnStdout: true
                     )
                     echo "app: ${app}"
-                    def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: app, url: "http://34.133.183.85:31119/v1/namespaces/kubevela-demo/applications/cicd-demo-app"
+                    def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: app, url: "http://http://34.133.183.85:32680/v1/namespaces/kubevela-demo/applications/cicd-demo-app"
                     println('Status: '+response.status)
                     println('Response: '+response.content)
                 }
