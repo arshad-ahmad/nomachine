@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                  withCredentials( [string(credentialsId: 'DockerhubCred', variable: 'DockerhubCred')]) {
+                  withCredentials( [string(credentialsId: 'DockerHubCredential', variable: 'DockerHubCredential')]) {
                     sh "docker login -u arshad1914 -p ${DockerhubCred}"
                   }
                         def customImage = docker.build(env.DOCKER_IMAGE)
